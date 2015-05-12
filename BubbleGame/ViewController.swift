@@ -10,13 +10,25 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var bubbles = [UIView]()
+    var bubblesCreated = 0
+    var bubblesPopped = 0.0
+    var bubbleArray = [UIView]()
+    var scoreView: UIView!
+    var bottomBorder = CALayer() // scoreView is extraneous after adding this
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        createSquare()
+        scoreView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height / 2))
+//        scoreView.layer.borderColor = UIColor.blueColor().CGColor
+//        scoreView.layer.borderWidth = 1
+        bottomBorder.frame = CGRect(x: 0, y: scoreView.frame.height, width: view.frame.width, height: 1)
+        bottomBorder.backgroundColor = UIColor.redColor().CGColor
+        scoreView.layer.addSublayer(bottomBorder)
+        view.addSubview(scoreView)
+
+        createBubble()
     }
 
     override func didReceiveMemoryWarning() {
@@ -24,28 +36,22 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func createSquare() {
-        let square = UIView(frame: CGRect(x: Int(arc4random_uniform(320)), y: 0, width: 100, height: 100))
-        square.backgroundColor = randomColor()
+    func createBubble() {
+        let startingRadius = 20
+        let endingRadius = 60
         
-//        let button   = UIButton.buttonWithType(UIButtonType.System) as! UIButton
-//        button.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
-//        
-//        button.backgroundColor = UIColor.greenColor()
-//        button.setTitle("Test Button", forState: UIControlState.Normal)
-//        square.addTarget(self, action: "buttonAction:", forControlEvents: UIControlEvents.TouchUpInside)
-        view.addSubview(square)
-        //square.addSubview(button)
-        bubbles.append(square)
+        let bubble = UIView(frame: CGRect(x: Int(arc4random_uniform(UInt32(Int(view.frame.width) - startingRadius * 2))), y: 0, width: startingRadius * 2, height: startingRadius * 2))
+        bubble.backgroundColor = randomColor()
+        view.addSubview(bubble)
+        bubbleArray.append(bubble)
         
-        UIView.animateWithDuration(3.0, delay: 0.0, options: UIViewAnimationOptions.AllowUserInteraction, animations: {
-            square.frame = CGRect(x: Int(arc4random_uniform(320)), y: 650, width: 100, height: 100)
-            //square.addTarget(self, action: "buttonAction:", forControlEvents: UIControlEvents.TouchUpInside)
+        UIView.animateWithDuration(3, delay: 0.0, options: UIViewAnimationOptions.CurveLinear | UIViewAnimationOptions.AllowUserInteraction, animations: {
+            bubble.frame = CGRect(x: Int(arc4random_uniform(UInt32(Int(self.view.frame.width) - endingRadius * 2))), y: Int(self.view.frame.height), width: endingRadius * 2, height: endingRadius * 2)
         }, completion: { finished in
-            square.removeFromSuperview()
-            self.createSquare()
-            self.bubbles.removeAtIndex(find(self.bubbles, square)!)
+            self.destroyBubbleAndCreate(bubble)
         })
+        
+        bubblesCreated += 1
     }
     
     func randomColor() -> UIColor {
@@ -59,22 +65,34 @@ class ViewController: UIViewController {
         let touch = touches.first as! UITouch
     }
     
-    func buttonAction(sender:UIButton!)
-    {
-        println("Button tapped")
+    func destroyBubbleAndCreate(bubble: UIView) {
+        if let bubbleExists = find(self.bubbleArray, bubble) {
+            println("\(bubblesPopped) out of \(bubblesCreated) bubbles popped: score = \(100 * bubblesPopped/Double(bubblesCreated))")
+            scoreView.frame = CGRect(x: 0, y: 0, width: Int(view.frame.width), height: Int(Double(view.frame.height) - Double(view.frame.height) * bubblesPopped / Double(bubblesCreated)))
+            bottomBorder.frame = CGRect(x: 0, y: scoreView.frame.height, width: view.frame.width, height: 1)
+            bubble.removeFromSuperview()
+            bubbleArray.removeAtIndex(find(self.bubbleArray, bubble)!)
+            createBubble()
+        }
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         let touch = touches.first as! UITouch
         let location = touch.locationInView(view)
-        println("location")
-        for button in bubbles {
-            println("bubble found")
-            if (button.layer.presentationLayer().hitTest(location) != nil) {
-                println("hit")
+        var hit = false
+        for bubble in bubbleArray {
+            if (bubble.layer.presentationLayer().hitTest(location) != nil) {
+                hit = true
+//                bubblesPopped += Double((view.frame.height - location.y) / view.frame.height)
+                bubblesPopped += 1
+                destroyBubbleAndCreate(bubble)
             }
         }
-        
+        if hit == false {
+            bubblesCreated += 1
+            scoreView.frame = CGRect(x: 0, y: 0, width: Int(view.frame.width), height: Int(Double(view.frame.height) - Double(view.frame.height) * bubblesPopped / Double(bubblesCreated)))
+            bottomBorder.frame = CGRect(x: 0, y: scoreView.frame.height, width: view.frame.width, height: 1)
+        }
     }
     
 }
