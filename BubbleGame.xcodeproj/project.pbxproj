@@ -36,6 +36,7 @@
 		2AEA2EDC1B00AFDF004F65C8 /* BubbleGameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BubbleGameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AEA2EE11B00AFDF004F65C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2AEA2EE21B00AFDF004F65C8 /* BubbleGameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleGameTests.swift; sourceTree = "<group>"; };
+		2AEA2EEC1B01FF7C004F65C8 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +84,7 @@
 				2AEA2ED31B00AFDF004F65C8 /* Images.xcassets */,
 				2AEA2ED51B00AFDF004F65C8 /* LaunchScreen.xib */,
 				2AEA2ECA1B00AFDF004F65C8 /* Supporting Files */,
+				2AEA2EEC1B01FF7C004F65C8 /* MyPlayground.playground */,
 			);
 			path = BubbleGame;
 			sourceTree = "<group>";

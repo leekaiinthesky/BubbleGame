@@ -8,97 +8,47 @@
 
 import UIKit
 
-class ViewController: UIViewController, UICollisionBehaviorDelegate {
+class ViewController: UIViewController {
     
-    var animator: UIDynamicAnimator!
-    var gravity: UIGravityBehavior!
-    var collision: UICollisionBehavior!
-    var firstContact = false
-
-    var square: UIView!
-    var snap: UISnapBehavior!
+//    var bubbles = [UIView]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        square = UIView(frame: CGRect(x: 100, y: 100, width: 100, height: 100))
-        square.backgroundColor = UIColor.grayColor()
-        view.addSubview(square)
-        
-        let barrier = UIView(frame: CGRect(x: 0, y: 300, width: 130, height: 20))
-        barrier.backgroundColor = UIColor.redColor()
-        view.addSubview(barrier)
-        
-        animator = UIDynamicAnimator(referenceView: view)
-        gravity = UIGravityBehavior(items: [square])
-        animator.addBehavior(gravity)
-        
-        collision = UICollisionBehavior(items: [square])
-        collision.collisionDelegate = self
-        collision.translatesReferenceBoundsIntoBoundary = true
-        // add a boundary that has the same frame as the barrier
-        collision.addBoundaryWithIdentifier("barrier", forPath: UIBezierPath(rect: barrier.frame))
-        animator.addBehavior(collision)
-        
-        var updateCount = 0
-        gravity.action = { // or collision.action = { // both get called at every animation frame
-//            if (updateCount % 3 == 0) {
-//                let outline = UIView(frame: square.bounds)
-//        //        outline.transform = square.transform
-//                outline.center = square.center
-//                
-//        //        outline.alpha = 0.5
-//                outline.backgroundColor = UIColor.clearColor()
-//                outline.layer.borderColor = square.layer.presentationLayer().backgroundColor
-//                outline.layer.borderWidth = 1.0
-//                self.view.addSubview(outline)
-//            }
-//            ++updateCount
-        }
-        
-        let itemBehaviour = UIDynamicItemBehavior(items: [square])
-        itemBehaviour.elasticity = 0.6
-        animator.addBehavior(itemBehaviour)
+        createSquare()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    func collisionBehavior(behavior: UICollisionBehavior!, beganContactForItem item: UIDynamicItem!, withBoundaryIdentifier identifier: NSCopying!, atPoint p: CGPoint) {
+    
+    func createSquare() {
+        let square = UIView(frame: CGRect(x: Int(arc4random_uniform(320)), y: 0, width: 10, height: 10))
+//        bubbles.append(square)
+        square.backgroundColor = randomColor()
+        view.addSubview(square)
         
-        println("Boundary contact occurred - \(identifier)")
-        let collidingView = item as! UIView
-        collidingView.backgroundColor = UIColor.yellowColor()
-        UIView.animateWithDuration(0.9) {
-            collidingView.backgroundColor = UIColor.grayColor()
-        }
-        
-//        if (!firstContact) {
-//            firstContact = true
-//            
-//            let newSquare = UIView(frame: CGRect(x: 30, y: 0, width: 100, height: 100))
-//            newSquare.backgroundColor = UIColor.grayColor()
-//            view.addSubview(newSquare)
-//            
-//            collision.addItem(newSquare)
-//            gravity.addItem(newSquare)
-//            
-////            let attach = UIAttachmentBehavior(item: collidingView, attachedToItem:newSquare)
-////            animator.addBehavior(attach)
-//        }
+        UIView.animateWithDuration(5.0, animations: {
+            square.frame = CGRect(x: Int(arc4random_uniform(320)), y: 700, width: 100, height: 100)
+        }, completion: { finished in
+            square.removeFromSuperview()
+//            self.bubbles.removeAtIndex(find(self.bubbles, square)!)
+            self.createSquare()
+        })
     }
     
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
-        if (snap != nil) {
-            animator.removeBehavior(snap)
-        }
-        
-        let touch = touches.first as! UITouch
-        snap = UISnapBehavior(item: square, snapToPoint: touch.locationInView(view))
-        animator.addBehavior(snap)
+    func randomColor() -> UIColor {
+        var randomRed = CGFloat(arc4random_uniform(256))/255.0
+        var randomGreen = CGFloat(arc4random_uniform(256))/255.0
+        var randomBlue = CGFloat(arc4random_uniform(256))/255.0
+        return UIColor(red: randomRed, green: randomGreen, blue: randomBlue, alpha: 1.0)
     }
+
+    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+        let touch = touches.first as! UITouch
+    }
+
 }
 
