@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: BubbleViewController {
+class ReactionTimeViewController: BubbleViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
