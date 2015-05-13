@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A3FD5401B0303860038AF39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3FD53F1B0303860038AF39 /* ViewController.swift */; };
+		2A3FD5421B0303FB0038AF39 /* ReactionTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3FD5411B0303FB0038AF39 /* ReactionTimeViewController.swift */; };
 		2AEA2ECD1B00AFDF004F65C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEA2ECC1B00AFDF004F65C8 /* AppDelegate.swift */; };
-		2AEA2ECF1B00AFDF004F65C8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEA2ECE1B00AFDF004F65C8 /* ViewController.swift */; };
+		2AEA2ECF1B00AFDF004F65C8 /* BubbleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEA2ECE1B00AFDF004F65C8 /* BubbleViewController.swift */; };
 		2AEA2ED21B00AFDF004F65C8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AEA2ED01B00AFDF004F65C8 /* Main.storyboard */; };
 		2AEA2ED41B00AFDF004F65C8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2AEA2ED31B00AFDF004F65C8 /* Images.xcassets */; };
 		2AEA2ED71B00AFDF004F65C8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2AEA2ED51B00AFDF004F65C8 /* LaunchScreen.xib */; };
@@ -27,10 +29,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2A3FD53F1B0303860038AF39 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2A3FD5411B0303FB0038AF39 /* ReactionTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactionTimeViewController.swift; sourceTree = "<group>"; };
 		2AEA2EC71B00AFDF004F65C8 /* BubbleGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BubbleGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AEA2ECB1B00AFDF004F65C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2AEA2ECC1B00AFDF004F65C8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2AEA2ECE1B00AFDF004F65C8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2AEA2ECE1B00AFDF004F65C8 /* BubbleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleViewController.swift; sourceTree = "<group>"; };
 		2AEA2ED11B00AFDF004F65C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2AEA2ED31B00AFDF004F65C8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		2AEA2ED61B00AFDF004F65C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -82,7 +86,9 @@
 			children = (
 				2AEA2ECC1B00AFDF004F65C8 /* AppDelegate.swift */,
 				2AEA2EED1B0210C9004F65C8 /* Bubble.swift */,
-				2AEA2ECE1B00AFDF004F65C8 /* ViewController.swift */,
+				2AEA2ECE1B00AFDF004F65C8 /* BubbleViewController.swift */,
+				2A3FD5411B0303FB0038AF39 /* ReactionTimeViewController.swift */,
+				2A3FD53F1B0303860038AF39 /* ViewController.swift */,
 				2AEA2ED01B00AFDF004F65C8 /* Main.storyboard */,
 				2AEA2ED31B00AFDF004F65C8 /* Images.xcassets */,
 				2AEA2ED51B00AFDF004F65C8 /* LaunchScreen.xib */,
@@ -217,9 +223,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2AEA2ECF1B00AFDF004F65C8 /* ViewController.swift in Sources */,
+				2AEA2ECF1B00AFDF004F65C8 /* BubbleViewController.swift in Sources */,
 				2AEA2EEE1B0210C9004F65C8 /* Bubble.swift in Sources */,
+				2A3FD5401B0303860038AF39 /* ViewController.swift in Sources */,
 				2AEA2ECD1B00AFDF004F65C8 /* AppDelegate.swift in Sources */,
+				2A3FD5421B0303FB0038AF39 /* ReactionTimeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -419,6 +427,7 @@
 				2AEA2EE81B00AFDF004F65C8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2AEA2EE91B00AFDF004F65C8 /* Build configuration list for PBXNativeTarget "BubbleGameTests" */ = {
 			isa = XCConfigurationList;
@@ -427,6 +436,7 @@
 				2AEA2EEB1B00AFDF004F65C8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
